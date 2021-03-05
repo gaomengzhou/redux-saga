@@ -15,7 +15,6 @@ class App extends React.Component {
     this.ws = new WebSocket("ws://123.207.136.134:9010/ajaxchattest");
   }
   soket = () => {
-    // const ws = new WebSocket("ws://123.207.136.134:9010/ajaxchattest");
     // 监听连接上 Websocket 服务端触发事件
     this.ws.onopen = (e) => {
       console.log("连接上 ws 服务端了");
@@ -33,12 +32,15 @@ class App extends React.Component {
     this.ws.onclose = (e) => {
       console.log("ws 连接关闭了");
     };
+
+    // 报错
+    this.ws.onerror = (error) => console.log("出错了:", error);
   };
   componentDidMount() {
     this.soket();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     if (this.props.state.counter !== prevProps.state.counter) {
       if (this.ws.onopen) {
         console.log("已连接");
@@ -46,9 +48,15 @@ class App extends React.Component {
       } else {
         console.log("已断开");
       }
+      console.log(
+        "全局监听counter==>改变了,",
+        prevProps.state.counter,
+        "变成",
+        this.props.state.counter
+      );
     }
-    console.log("全局页面");
-  }
+    console.log("全局页面触发");
+  };
 
   render() {
     // this.soket();
