@@ -1,4 +1,7 @@
-const users = (state = {}, action = {}) => {
+const initState = {
+  name: "my",
+};
+const users = (state = initState, action = {}) => {
   switch (action.type) {
     default:
       return state;
