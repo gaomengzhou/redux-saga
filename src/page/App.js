@@ -59,7 +59,6 @@ class App extends React.Component {
   };
 
   render() {
-    // this.soket();
     return (
       <Router>
         <Switch>
